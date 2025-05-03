@@ -14,6 +14,13 @@ def read_records():
     except FileNotFoundError:
         return []
 
+def delete_record(text):
+    records = read_records()
+    records = [record for record in records if record != text]
+    with open('records.txt', 'w') as file:
+        for record in records:
+            file.write(record + '\n')
+
 @app.route('/')
 def index():
     return render_template('index.html')
@@ -30,6 +37,12 @@ def view_records():
     records = read_records()
     return render_template('records.html', records=records)
 
+@app.route('/delete', methods=['POST'])
+def delete_record_route():
+    text = request.form.get('text')
+    if text:
+        delete_record(text)
+    return redirect(url_for('view_records'))
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)
-
