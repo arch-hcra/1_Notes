@@ -1,6 +1,7 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, flash
 
 app = Flask(__name__)
+app.secret_key = 'd79x234'
 
 def save_record(text):
     with open('records.txt', 'a') as file:
@@ -28,8 +29,11 @@ def index():
 @app.route('/add', methods=['POST'])
 def add_record():
     text = request.form.get('text')
-    if text:
+    if text and text.strip():
         save_record(text)
+        flash('Success add', 'success')
+    else:
+        flash('Is not is empty.', 'error')
     return redirect(url_for('view_records'))
 
 @app.route('/records')
@@ -42,6 +46,7 @@ def delete_record_route():
     text = request.form.get('text')
     if text:
         delete_record(text)
+        flash('Deleted success', 'success')
     return redirect(url_for('view_records'))
 
 if __name__ == '__main__':

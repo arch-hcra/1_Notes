@@ -6,14 +6,16 @@
     <title>All notes</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Arial', sans-serif;
             background-color: #f0f8ff;
             color: #333;
             text-align: center;
-            padding: 20px;
+            padding: 50px;
         }
         h1 {
             color: #4a90e2;
+            margin-bottom: 30px;
+            font-size: 2.5em;
         }
         ul {
             list-style-type: none;
@@ -22,12 +24,17 @@
         li {
             background-color: #e7f3fe;
             border: 1px solid #b3d7ff;
-            border-radius: 5px;
-            padding: 10px;
-            margin: 5px 0;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 10px 0;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            transition: transform 0.2s;
+        }
+        li:hover {
+            transform: translateY(-2px);
         }
         button {
             padding: 5px 10px;
@@ -36,6 +43,7 @@
             border: none;
             border-radius: 5px;
             cursor: pointer;
+            transition: background-color 0.3s;
         }
         button:hover {
             background-color: #c0392b;
@@ -45,6 +53,7 @@
             margin-top: 20px;
             color: #4a90e2;
             text-decoration: none;
+            font-weight: bold;
         }
         a:hover {
             text-decoration: underline;
@@ -67,3 +76,12 @@
     <a href="/">Add notes</a>
 </body>
 </html>
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        <ul class="flashes">
+        {% for category, message in messages %}
+            <li class="{{ category }}">{{ message }}</li>
+        {% endfor %}
+        </ul>
+    {% endif %}
+{% endwith %}
