@@ -1,12 +1,16 @@
 version: '3.8'
 
 services:
-  web:
-    image: python:3.9
-    volumes:
-      - .:/app
-    working_dir: /app
-    command: >
-      bash -c "pip install --no-cache-dir -r requirements.txt && python app.py"
+  app:
+    build:
+      context: ./app  # Путь к папке с Dockerfile для app
     ports:
-      - "5000:5000"
+      - "5000:5000"  # Порт, на котором будет доступно ваше приложение
+    depends_on:
+      - record_service
+
+  record_service:
+    build:
+      context: ./record_service  # Путь к папке с Dockerfile для record_service
+    ports:
+      - "5001:5000"  # Порт, на котором будет доступен сервис
