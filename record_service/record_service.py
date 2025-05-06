@@ -1,24 +1,30 @@
 import os
+import json
 from flask import Flask, request, jsonify
 
 app = Flask(__name__)
-FILENAME = 'records.txt'
+FILENAME = 'records.json'
 
 def save_record(text):
-    with open(FILENAME, 'a') as file:
-        file.write(text + '\n')
+    records = read_records()
+    records.append(text)
+    with open(FILENAME, 'w') as file:
+        json.dump(records, file)
 
 def read_records():
     if not os.path.exists(FILENAME):
         return []
-    with open(FILENAME, 'r') as file:
-        return [record.strip() for record in file.readlines()]
+    try:
+        with open(FILENAME, 'r') as file:
+            return json.load(file)
+    except json.JSONDecodeError:
+        return []
 
 def delete_record(text):
     records = read_records()
     records = [record for record in records if record != text]
     with open(FILENAME, 'w') as file:
-        file.writelines(record + '\n' for record in records)
+        json.dump(records, file)
 
 @app.route('/save', methods=['POST'])
 def save_record_route():
@@ -39,3 +45,4 @@ def delete_record_route():
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
+

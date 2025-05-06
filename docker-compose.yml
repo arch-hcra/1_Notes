@@ -14,3 +14,9 @@ services:
       context: ./record_service
     ports:
       - "5001:5000"
+    volumes:
+      - -path-/records.json:/service/records.json 
+
+volumes:
+  data:
+
