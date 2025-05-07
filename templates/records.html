@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Records</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f8ff;
+            color: #333;
+            text-align: center;
+            padding: 50px;
+        }
+        h1 {
+            color: #004080; 
+            margin-bottom: 30px;
+        }
+        ul {
+            list-style-type: none; 
+            padding: 0; 
+        }
+        li {
+            margin: 10px 0; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+        }
+        button {
+            background-color: #ff4d4d; 
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 5px 10px; 
+            cursor: pointer;
+            transition: background-color 0.3s; 
+        }
+        button:hover {
+            background-color: #cc0000; 
+        }
+        a {
+            display: inline-block;
+            margin-top: 20px;
+            color: #004080; 
+            text-decoration: none;
+            font-weight: bold;
+        }
+        a:hover {
+            text-decoration: underline; 
+        }
+    </style>
+</head>
+<body>
+    <h1>Records in Text File</h1>
+    <ul>
+        {% for record in records %}
+            <li>
+                {{ record }} 
+                <form action="{{ url_for('delete_record_from_file_route') }}" method="POST" style="display:inline;">
+                    <input type="hidden" name="text" value="{{ record }}">
+                    <button type="submit">Delete</button>
+                </form>
+            </li>
+        {% endfor %}
+    </ul>
+    <a href="/">Back</a>
+</body>
+</html>

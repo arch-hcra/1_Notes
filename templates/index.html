@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Record to Text File</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #e6f0ff; 
+            color: #333;
+            text-align: center;
+            padding: 50px;
+        }
+        h1 {
+            color: #004080;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+        }
+        input[type="text"] {
+            padding: 15px;
+            width: 300px;
+            border: 1px solid #ccc;
+            border-radius: 30px;
+            margin-right: 10px;
+            transition: border-color 0.3s;
+        }
+        input[type="text"]:focus {
+            border-color: #004080;
+            outline: none;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #0066cc; 
+            color: white;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+        button:hover {
+            background-color: #00509e;
+            transform: translateY(-2px);
+        }
+        a {
+            display: inline-block;
+            margin-top: 20px;
+            color: #0066cc; 
+            text-decoration: none;
+            font-weight: bold;
+            margin-right: 15px;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <h1>Add Record</h1>
+    <form action="/add" method="POST">
+        <input type="text" name="text" placeholder="Enter your note" required>
+        <button type="submit">Save</button>
+    </form>
+    <form action="/upload_to_db" method="POST" style="margin-top: 20px;">
+        <button type="submit">Write to Database</button>
+    </form>
+    <div style="margin-top: 30px;">
+        <a href="/records">View Records</a>
+        <a href="/view_db_records">View Database Records</a>
+    </div>
+</body>
+</html>
