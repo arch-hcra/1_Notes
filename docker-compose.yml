@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  file_service:
+    build:
+      context: ./file_service
+    ports:
+      - "5001:5001"
+
+  display_service:
+    build:
+      context: ./display_service
+    ports:
+      - "5003:5003"
+    depends_on:
+      - file_service
+      - db_service
+
+  db_service:
+    build:
+      context: ./db_service
+    ports:
+      - "5002:5002"

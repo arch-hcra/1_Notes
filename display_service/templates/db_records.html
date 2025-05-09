@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Database Records</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>    
+<body>
+    <div class="container">
+        <h1>Records in DateBase</h1>
+        <ul>
+            {% for record in records %}
+                <li>
+                    {{ record }}
+                    <form action="{{ url_for('delete_db_record', record=record) }}" method="post" style="display:inline;">
+                        <button type="submit" class="delete">Delete</button>
+                    </form>
+                </li>
+            {% endfor %}
+        </ul>
+        
+        <a href="/" class="back-button">Back</a>
+    </div>
+</body>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notes is txt</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+
+</head>
+<body>
+    <h1>Notes is txt</h1>
+    <ul>
+        {% for record in records %}
+            <li>
+                {{ record }}
+                <form action="{{ url_for('delete_record', record=record) }}" method="post" style="display:inline;">
+                    <button type="submit" class="delete">Delete</button>
+                </form>
+            </li>
+        {% endfor %}
+    </ul>
+    <a href="/" class="back-button">Back</a>
+</body>
+</html>

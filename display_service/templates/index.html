@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Microservices App</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <h1>Welcome to the Microservices App</h1>
+    <nav>
+        <a href="/view_records" class="nav-button">View Text File Records</a><br>
+        <a href="/view_db_records" class="nav-button">View Database Records</a><br>
+    </nav>
+    
+    <h2>Add Record to Text File</h2>
+    <form action="/add" method="post" enctype="multipart/form-data">
+        <input type="text" name="text" placeholder="Enter text" required>
+        <button type="submit">Add Record</button>
+    </form>
+    
+    <h2>Upload All Text File Records to Database</h2>
+    <form action="/upload_to_db" method="post">
+        <button type="submit">Upload to Database</button>
+    </form>
+</body>
+</html>
